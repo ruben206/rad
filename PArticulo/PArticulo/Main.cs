@@ -15,7 +15,11 @@ namespace PArticulo
 			mySqlConnection.Open ();
 			
 			MySqlCommand updateMySqlCommand = mySqlConnection.CreateCommand ();
-			updateMySqlCommand.CommandText = "update articulo set nombre=:nombre where id=1";
+			updateMySqlCommand.CommandText = "UPDATE articulo SET nombre = @nombre WHERE ID = 1";
+			MySqlParameter mySqlParameter = updateMySqlCommand.CreateParameter();
+			mySqlParameter.ParameterName = "nombre";
+			mySqlParameter.Value = DateTime.Now.ToString();
+			updateMySqlCommand.Parameters.Add (mySqlParameter);
 			
 			updateMySqlCommand.ExecuteNonQuery ();
 			
@@ -28,6 +32,7 @@ namespace PArticulo
 			}
 			mySqlDataReader.Close ();
 			mySqlConnection.Close ();
+	
 		}
 	}
 }
