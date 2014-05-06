@@ -1,9 +1,24 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PArticulo/Main.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PArticulo/PConexion.cs">
     <Files>
-      <File FileName="PArticulo/Main.cs" Line="20" Column="42" />
+      <File FileName="PArticulo/Main.cs" Line="35" Column="4" />
+      <File FileName="PArticulo/PConexion.cs" Line="14" Column="29" />
+      <File FileName="../PGTKArticulo.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="PArticulo" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="PGTKArticulo.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
