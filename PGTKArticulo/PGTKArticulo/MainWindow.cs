@@ -21,21 +21,14 @@ using MySql.Data.MySqlClient;
 			MySqlDataReader mySqlDataReader= mySqlCommand.ExecuteReader();
 
 
-
-
-			// CREACION DE LOS APENDICES DE LA TABLA
 			for (int index=0; index<mySqlDataReader.FieldCount;index ++)
 				TreeView.AppendColumn(mySqlDataReader.GetName(index),new CellRendererText(),"text",index);
 
 
-
-			//CREACION DEL MODELO DE DATOS DE LA TABLA
 			int fieldCount = mySqlDataReader.FieldCount;
 
 			ListStore listStore= createListStore(fieldCount);
 
-
-			//INSERCION DE LOS DATOS DENTRO DEL MODELO
 			while(mySqlDataReader.Read()){
 
 				string []line= new string[mySqlDataReader.FieldCount];
@@ -46,7 +39,7 @@ using MySql.Data.MySqlClient;
 
 				listStore.AppendValues(line);
 
-				//INSERCION DEL MODELO EN LA TABLA(TREEVIEW)
+
 				treeview.Model=listStore;
 
 			}
@@ -69,7 +62,6 @@ using MySql.Data.MySqlClient;
 			String mensaje;
 
 
-			//CON ESTA CONDICION PROTEJO EL EVENTO EN CASO DE QUE SE ACTIVARA EL BOTON Y NO HUBIESE NADA SELECCIONADO	
 			if (treeview.Selection.CountSelectedRows()==0)
 				return;
 
@@ -129,12 +121,11 @@ using MySql.Data.MySqlClient;
 			listStore.Clear();
 			MySqlDataReader mySqlDataReaderActualiza= mySqlCommand.ExecuteReader();
 
-			//CREACION DEL MODELO DE DATOS DE LA TABLA
 			fieldCount = mySqlDataReaderActualiza.FieldCount;
 
 			listStore= createListStore(fieldCount);
 
-			//INSERCION DE LOS DATOS DENTRO DEL MODELO
+
 			while(mySqlDataReaderActualiza.Read()){
 
 				string []line= new string[mySqlDataReaderActualiza.FieldCount];
@@ -145,7 +136,6 @@ using MySql.Data.MySqlClient;
 
 				listStore.AppendValues(line);
 
-				//INSERCION DEL MODELO EN LA TABLA(TREEVIEW)
 				treeview.Model=listStore;
 
 
@@ -155,20 +145,6 @@ using MySql.Data.MySqlClient;
 		};
 
 
-
-
-			// CREACION DE UN EVENTO PARA TREEVIEW (INDICA EN CONSOLA EN QUE CELDA NOS ENCONTRAMOS)
-//			treeview.Selection.Changed += delegate {
-//	
-//				TreeIter treeIter;
-//				if(treeview.Selection.GetSelected(out treeIter)){
-//				
-//					Console.WriteLine("path= "+listStore.GetPath(treeIter));
-//					Console.WriteLine(listStore.GetValue(treeIter,0));
-//					Console.WriteLine(listStore.GetValue(treeIter,1));
-//				}else
-//					Console.WriteLine("fuera de rango");
-//				};
 	}
 
 
