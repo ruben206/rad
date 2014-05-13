@@ -6,17 +6,7 @@ namespace PGTKArticulo
 	{
 		protected virtual void Build ()
 		{
-			global::Stetic.Gui.Initialize (this);
-			// Widget PGTKArticulo.VentanaAñadir
-			this.Name = "PGTKArticulo.VentanaAñadir";
-			this.Title = global::Mono.Unix.Catalog.GetString ("VentanaAñadir");
-			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
-			if ((this.Child != null)) {
-				this.Child.ShowAll ();
-			}
-			this.DefaultWidth = 400;
-			this.DefaultHeight = 300;
-			this.Show ();
+			
 		}
 	}
 }

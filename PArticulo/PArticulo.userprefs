@@ -1,17 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PArticulo/PConexion.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../PGTKArticulo/PGTKArticulo/MainWindow.cs">
     <Files>
       <File FileName="PArticulo/Main.cs" Line="35" Column="4" />
       <File FileName="PArticulo/PConexion.cs" Line="14" Column="29" />
       <File FileName="../PGTKArticulo.cs" Line="1" Column="1" />
+      <File FileName="../PGTKArticulo/PGTKArticulo/Main.cs" Line="19" Column="16" />
+      <File FileName="../PGTKArticulo/PGTKArticulo/MainWindow.cs" Line="73" Column="13" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="PArticulo" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="PGTKArticulo.cs" selected="True" />
           </Node>
         </State>
       </Pad>

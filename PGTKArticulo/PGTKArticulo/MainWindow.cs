@@ -40,12 +40,65 @@ using MySql.Data.MySqlClient;
 				listStore.AppendValues(line);
 
 				treeView.Model=listStore;
+			
+				
 
 			}
 		mySqlDataReader.Close();
 
 		mySqlCommand.CommandText= "select * from articulo";
+		
+		editAction.Sensitive=false;
+		deleteAction.Sensitive=false;
+		
+		treeView.Selection.Changed += delegate 
 
+			{
+				editAction.Sensitive= treeView.Selection.CountSelectedRows()>0;
+				deleteAction.Sensitive= treeView.Selection.CountSelectedRows()>0;
+			};
+
+		editAction.Activated += delegate {
+			if (treeView.Selection.CountSelectedRows() == 0)
+				return;
+			TreeIter treeIter;
+			treeView.Selection.GetSelected(out treeIter);
+			object id = listStore.GetValue (treeIter, 0);
+			object nombre = listStore.GetValue (treeIter, 1);
+
+			MessageDialog messageDialog = new MessageDialog(this,
+                DialogFlags.DestroyWithParent,
+                MessageType.Info,
+                ButtonsType.Ok,
+                "Seleccionado Id={0} Nombre={1}", id, nombre);
+			messageDialog.Title = "Editar";
+			messageDialog.Run ();
+			messageDialog.Destroy ();
+		};
+		
+		deleteAction.Activated += delegate {
+			if (treeView.Selection.CountSelectedRows() == 0)
+				return;
+			TreeIter treeIter;
+			treeView.Selection.GetSelected(out treeIter);
+			object id = listStore.GetValue (treeIter, 0);
+
+			MessageDialog messageDialog = new MessageDialog(this,
+                DialogFlags.DestroyWithParent,
+                MessageType.Question,
+                ButtonsType.YesNo,
+                "¿Quieres eliminar el elemento seleccionado?");
+			messageDialog.Title = "Eliminar elemento";
+			ResponseType response = (ResponseType)messageDialog.Run ();
+			messageDialog.Destroy ();
+			if (response == ResponseType.Yes ) {
+				MySqlCommand deleteMySqlCommand = mySqlConnection.CreateCommand();
+				deleteMySqlCommand.CommandText = "delete from articulo where id=" + id;
+				deleteMySqlCommand.ExecuteNonQuery();
+			}
+		};
+		
+		
 		refreshAction.Activated += delegate {
 
 			listStore.Clear();

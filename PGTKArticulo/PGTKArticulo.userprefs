@@ -1,15 +1,23 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../RADPA/PSerpisAd/PSerpisAd/DbCommandUtil.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PGTKArticulo/gtk-gui/PGTKArticulo.VentanaAñadir.cs">
     <Files>
-      <File FileName="PGTKArticulo/Main.cs" Line="4" Column="20" />
-      <File FileName="PGTKArticulo/MainWindow.cs" Line="46" Column="5" />
-      <File FileName="PGTKArticulo/VentanaAñadir.cs" Line="1" Column="1" />
-      <File FileName="PGTKArticulo/newRegistro.cs" Line="1" Column="1" />
-      <File FileName="../../RADPA/PSerpisAd/PSerpisAd/App.cs" Line="1" Column="1" />
-      <File FileName="../../RADPA/PSerpisAd/PSerpisAd/AssemblyInfo.cs" Line="1" Column="1" />
-      <File FileName="../../RADPA/PSerpisAd/PSerpisAd/DbCommandUtil.cs" Line="1" Column="1" />
+      <File FileName="../PArticulo/PArticulo/Main.cs" Line="35" Column="4" />
+      <File FileName="../PArticulo/PArticulo/PConexion.cs" Line="14" Column="29" />
+      <File FileName="../PGTKArticulo.cs" Line="1" Column="1" />
+      <File FileName="PGTKArticulo/Main.cs" Line="19" Column="16" />
+      <File FileName="PGTKArticulo/MainWindow.cs" Line="52" Column="32" />
+      <File FileName="PGTKArticulo/gtk-gui/PGTKArticulo.VentanaAñadir.cs" Line="8" Column="4" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="PGTKArticulo" expanded="True">
+            <Node name="MainWindow.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
