@@ -1,11 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PGTKArticulo/MainWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../RADPA/PSerpisAd/PSerpisAd/DbCommandUtil.cs">
     <Files>
       <File FileName="PGTKArticulo/Main.cs" Line="4" Column="20" />
-      <File FileName="PGTKArticulo/MainWindow.cs" Line="12" Column="3" />
-      <File FileName="PGTKArticulo/VentanaAñadir.cs" Line="3" Column="23" />
-      <File FileName="PGTKArticulo/newRegistro.cs" Line="3" Column="23" />
+      <File FileName="PGTKArticulo/MainWindow.cs" Line="46" Column="5" />
+      <File FileName="PGTKArticulo/VentanaAñadir.cs" Line="1" Column="1" />
+      <File FileName="PGTKArticulo/newRegistro.cs" Line="1" Column="1" />
+      <File FileName="../../RADPA/PSerpisAd/PSerpisAd/App.cs" Line="1" Column="1" />
+      <File FileName="../../RADPA/PSerpisAd/PSerpisAd/AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="../../RADPA/PSerpisAd/PSerpisAd/DbCommandUtil.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

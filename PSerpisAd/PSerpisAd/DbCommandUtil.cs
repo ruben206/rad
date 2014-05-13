@@ -1,11 +1,10 @@
 using System;
 using System.Data;
 
-namespace PSerpisAd
+namespace Serpis.Ad
 {
 	public static class DbCommandUtil
 	{
-		
 				public static void AddParameter(IDbCommand dbCommand, string name, object value) {
 				IDbDataParameter dbDataParameter = dbCommand.CreateParameter();
 				dbDataParameter.ParameterName = name;

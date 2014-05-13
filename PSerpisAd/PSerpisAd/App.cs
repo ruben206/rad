@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace PSerpisAd
+namespace Serpis.Ad
 {
 	public class App
 	{
@@ -17,11 +17,9 @@ namespace PSerpisAd
 		private IDbConnection dbConnection;
 		public IDbConnection DbConnection {
 			get {return dbConnection;}
-			set {
-				dbConnection = value;
+			set {dbConnection = value;
 				if (dbConnection.State == ConnectionState.Closed)
-					dbConnection.Open ();
-			}
+					dbConnection.Open ();}
 		}	
 	}
 }

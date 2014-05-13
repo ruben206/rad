@@ -1,5 +1,7 @@
 using System;
 using Gtk;
+using Serpis.Ad;
+using System.Data;
 using MySql.Data.MySqlClient;
 	public partial class MainWindow: Gtk.Window
 	{
@@ -20,10 +22,8 @@ using MySql.Data.MySqlClient;
 
 			MySqlDataReader mySqlDataReader= mySqlCommand.ExecuteReader();
 
-
 			for (int index=0; index<mySqlDataReader.FieldCount;index ++)
-				TreeView.AppendColumn(mySqlDataReader.GetName(index),new CellRendererText(),"text",index);
-
+				treeView.AppendColumn(mySqlDataReader.GetName(index),new CellRendererText(),"text",index);
 
 			int fieldCount = mySqlDataReader.FieldCount;
 
@@ -39,83 +39,13 @@ using MySql.Data.MySqlClient;
 
 				listStore.AppendValues(line);
 
-
-				treeview.Model=listStore;
+				treeView.Model=listStore;
 
 			}
 		mySqlDataReader.Close();
-		editAction.Sensitive=false;
-		deleteAction.Sensitive=false;
-		addAction.Sensitive=false;
 
 		mySqlCommand.CommandText= "select * from articulo";
 
-		treeview.Selection.Changed += delegate 
-
-			{
-				editAction.Sensitive= treeview.Selection.CountSelectedRows()>0;
-				deleteAction.Sensitive= treeview.Selection.CountSelectedRows()>0;
-				addAction.Sensitive=treeview.Selection.CountSelectedRows()>0;
-			};
-
-			editAction.Activated += delegate {
-			String mensaje;
-
-
-			if (treeview.Selection.CountSelectedRows()==0)
-				return;
-
-
-			TreeIter treeIter;
-			if(treeview.Selection.GetSelected(out treeIter)){
-				String[] linea = new String[fieldCount];	
-				for (int index=0; index< fieldCount;index++)		
-					linea[index]=listStore.GetValue(treeIter,index).ToString();
-
-			 mensaje= string.Join("  ", linea);
-			}
-
-			MessageDialog md = new MessageDialog (this,DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close, mensaje);
-
-			md.Run ();
-			md.Destroy();
-				};
-
-			deleteAction.Activated += delegate {
-
-				if(treeview.Selection.CountSelectedRows()==0)
-					return;
-				TreeIter treeIter;
-				treeview.Selection.GetSelected(out treeIter);
-				object id = listStore.GetValue(treeIter,0).ToString();
-				Console.WriteLine(id);
-
-				MySqlCommand mySqlCommandDelete= mySqlConnection.CreateCommand();
-				mySqlCommandDelete.CommandText= "delete from articulo where id='"+id+"'";
-
-				MessageDialog md = new MessageDialog (this, 
-                                      	DialogFlags.DestroyWithParent,
-	                              		MessageType.Question, 
-                                      	ButtonsType.YesNo, "¿Estas seguro de eliminarlo?");
-				ResponseType result = (ResponseType)md.Run ();
-
-				if (result == ResponseType.Yes){
-					mySqlCommandDelete.ExecuteNonQuery();
-					md.Destroy();
-
-				}
-				else
-					md.Destroy();
-
-				};
-
-
-			addAction.Activated += delegate {
-
-				if(treeview.Selection.CountSelectedRows()==0)
-					return;
-
-			};
 		refreshAction.Activated += delegate {
 
 			listStore.Clear();
@@ -124,7 +54,6 @@ using MySql.Data.MySqlClient;
 			fieldCount = mySqlDataReaderActualiza.FieldCount;
 
 			listStore= createListStore(fieldCount);
-
 
 			while(mySqlDataReaderActualiza.Read()){
 
@@ -136,29 +65,22 @@ using MySql.Data.MySqlClient;
 
 				listStore.AppendValues(line);
 
-				treeview.Model=listStore;
+
+				treeView.Model=listStore;
 
 
 			}
 
 			mySqlDataReaderActualiza.Close();
 		};
-
-
 	}
-
-
-
-
 		private ListStore createListStore(int fieldCount){
 			Type[] types = new Type[fieldCount];
 			for (int index = 0; index < fieldCount; index++)
 				types[index] = typeof(string);
 				return new ListStore(types);
 		}		
-
-
-
+	
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a){
 			Application.Quit ();
 			a.RetVal = true;
