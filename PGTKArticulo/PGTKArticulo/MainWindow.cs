@@ -16,24 +16,24 @@ using MySql.Data.MySqlClient;
 
 			mySqlConnection = new MySqlConnection(connectionString);
 			mySqlConnection.Open();
+		
+			IDbCommand selectDbCommand= App.Instance.DbConnection.CreateCommand();
+			selectDbCommand.CommandText= "select * from articulo";
 
-			MySqlCommand mySqlCommand= mySqlConnection.CreateCommand();
-			mySqlCommand.CommandText= "select * from articulo";
+			IDataReader dataReader= selectDbCommand.ExecuteReader();
 
-			MySqlDataReader mySqlDataReader= mySqlCommand.ExecuteReader();
+			for (int index=0; index<dataReader.FieldCount;index ++)
+				treeView.AppendColumn(dataReader.GetName(index),new CellRendererText(),"text",index);
 
-			for (int index=0; index<mySqlDataReader.FieldCount;index ++)
-				treeView.AppendColumn(mySqlDataReader.GetName(index),new CellRendererText(),"text",index);
-
-			int fieldCount = mySqlDataReader.FieldCount;
+			int fieldCount = dataReader.FieldCount;
 
 			ListStore listStore= createListStore(fieldCount);
 
-			while(mySqlDataReader.Read()){
+			while(dataReader.Read()){
 
-				string []line= new string[mySqlDataReader.FieldCount];
-				for (int index=0; index< mySqlDataReader.FieldCount;index++){
-						object value= mySqlDataReader.GetValue(index);
+				string []line= new string[dataReader.FieldCount];
+				for (int index=0; index< dataReader.FieldCount;index++){
+						object value= dataReader.GetValue(index);
 						line[index]=value.ToString();			
 						}
 
@@ -44,9 +44,9 @@ using MySql.Data.MySqlClient;
 				
 
 			}
-		mySqlDataReader.Close();
+		dataReader.Close();
 
-		mySqlCommand.CommandText= "select * from articulo";
+		selectDbCommand.CommandText= "select * from articulo";
 		
 		editAction.Sensitive=false;
 		deleteAction.Sensitive=false;
@@ -57,23 +57,43 @@ using MySql.Data.MySqlClient;
 				editAction.Sensitive= treeView.Selection.CountSelectedRows()>0;
 				deleteAction.Sensitive= treeView.Selection.CountSelectedRows()>0;
 			};
-
-		editAction.Activated += delegate {
-			if (treeView.Selection.CountSelectedRows() == 0)
-				return;
-			TreeIter treeIter;
-			treeView.Selection.GetSelected(out treeIter);
-			object id = listStore.GetValue (treeIter, 0);
-			object nombre = listStore.GetValue (treeIter, 1);
-
-			MessageDialog messageDialog = new MessageDialog(this,
-                DialogFlags.DestroyWithParent,
-                MessageType.Info,
-                ButtonsType.Ok,
-                "Seleccionado Id={0} Nombre={1}", id, nombre);
-			messageDialog.Title = "Editar";
-			messageDialog.Run ();
-			messageDialog.Destroy ();
+		
+		addAction.Activated += delegate {
+			string nombre = txtNombre.Text;
+    		string telefono = txtTelefono.Text;
+    		string categoria = txtCategoria.Text;
+			string precio = txtPrecio.Text;
+    		string Scn;
+    		Scn = connectionString;
+     
+    if (txtNombre.Text.Trim () == "" && txtCategoria.Text.Trim () == "" && txtPrecio.Text.Trim () == "") {
+        MessageDialog md = new MessageDialog (this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, "Ingrese Datos completos");
+        md.Run ();
+        md.Destroy ();
+    } else {
+        using (MySqlConnection cn = new MySqlConnection (Scn)) {
+            MySqlCommand cmd = new MySqlCommand ();
+            cmd.Connection = cn;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "INSERT INTO personas(id,nombre,categoria,precio) values(@nombre,@categoria,@precio)";
+            cmd.Parameters.AddWithValue ("@nombre", nombre);
+            cmd.Parameters.AddWithValue ("@categoria", categoria);
+            cmd.Parameters.AddWithValue ("@precio", precio);
+            try {
+                cn.Open ();
+                cmd.ExecuteNonQuery ();
+                MessageDialog md = new MessageDialog (this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, "Los Datos se guardaron Correctamente");
+                md.Run ();
+                md.Destroy ();
+            } catch (Exception ex) {
+                throw new Exception (ex.Message);
+            } finally {
+                cn.Dispose ();
+                cmd.Dispose ();
+            }
+            txtNombre.Text = "";
+            txtCategoria.Text = "";
+            txtprecio.Text = "";
 		};
 		
 		deleteAction.Activated += delegate {
@@ -102,17 +122,17 @@ using MySql.Data.MySqlClient;
 		refreshAction.Activated += delegate {
 
 			listStore.Clear();
-			MySqlDataReader mySqlDataReaderActualiza= mySqlCommand.ExecuteReader();
+			IDataReader dataReaderActualiza= selectDbCommand.ExecuteReader();
 
-			fieldCount = mySqlDataReaderActualiza.FieldCount;
+			fieldCount = dataReaderActualiza.FieldCount;
 
 			listStore= createListStore(fieldCount);
 
-			while(mySqlDataReaderActualiza.Read()){
+			while(dataReaderActualiza.Read()){
 
-				string []line= new string[mySqlDataReaderActualiza.FieldCount];
-				for (int index=0; index< mySqlDataReaderActualiza.FieldCount;index++){
-						object value= mySqlDataReaderActualiza.GetValue(index);
+				string []line= new string[dataReaderActualiza.FieldCount];
+				for (int index=0; index< dataReaderActualiza.FieldCount;index++){
+						object value= dataReaderActualiza.GetValue(index);
 						line[index]=value.ToString();			
 						}
 
@@ -124,10 +144,11 @@ using MySql.Data.MySqlClient;
 
 			}
 
-			mySqlDataReaderActualiza.Close();
+			dataReaderActualiza.Close();
 		};
 	}
-		private ListStore createListStore(int fieldCount){
+	
+	private ListStore createListStore(int fieldCount){
 			Type[] types = new Type[fieldCount];
 			for (int index = 0; index < fieldCount; index++)
 				types[index] = typeof(string);

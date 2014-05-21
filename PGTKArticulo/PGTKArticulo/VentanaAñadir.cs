@@ -1,9 +1,8 @@
 using System;
-using System.Data;
 using Gtk;
-using Serpis.Ad;
+using System.Data;
 
-namespace PGTKArticulo
+namespace Serpis.Ad
 {
 	public partial class VentanaAñadir : Gtk.Window
 	{
@@ -14,3 +13,4 @@ namespace PGTKArticulo
 		}
 	}
 }
+

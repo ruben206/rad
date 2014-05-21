@@ -76,7 +76,9 @@
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="gtk-gui\PGTKArticulo.VentanaAñadir.cs" />
+    <Compile Include="VentanaAñadir.cs" />
+    <Compile Include="gtk-gui\Serpis.Ad.VentanaAñadir.cs" />
+    <Compile Include="TreeViewFiller.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
