@@ -1,21 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PGTKArticulo/MainWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../proyectoExamen/proyectoExamen/MainWindow.cs">
     <Files>
-      <File FileName="PGTKArticulo/Main.cs" Line="19" Column="16" />
-      <File FileName="PGTKArticulo/MainWindow.cs" Line="149" Column="2" />
-      <File FileName="PGTKArticulo/VentanaAñadir.cs" Line="12" Column="18" />
-      <File FileName="PGTKArticulo/TreeViewFiller.cs" Line="43" Column="7" />
+      <File FileName="../proyectoExamen/proyectoExamen/MainWindow.cs" Line="128" Column="37" />
+      <File FileName="PGTKArticulo/MainWindow.cs" Line="86" Column="5" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="PGTKArticulo" expanded="True">
-            <Node name="MainWindow.cs" selected="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

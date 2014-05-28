@@ -59,41 +59,8 @@ using MySql.Data.MySqlClient;
 			};
 		
 		addAction.Activated += delegate {
-			string nombre = txtNombre.Text;
-    		string telefono = txtTelefono.Text;
-    		string categoria = txtCategoria.Text;
-			string precio = txtPrecio.Text;
-    		string Scn;
-    		Scn = connectionString;
-     
-    if (txtNombre.Text.Trim () == "" && txtCategoria.Text.Trim () == "" && txtPrecio.Text.Trim () == "") {
-        MessageDialog md = new MessageDialog (this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, "Ingrese Datos completos");
-        md.Run ();
-        md.Destroy ();
-    } else {
-        using (MySqlConnection cn = new MySqlConnection (Scn)) {
-            MySqlCommand cmd = new MySqlCommand ();
-            cmd.Connection = cn;
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "INSERT INTO personas(id,nombre,categoria,precio) values(@nombre,@categoria,@precio)";
-            cmd.Parameters.AddWithValue ("@nombre", nombre);
-            cmd.Parameters.AddWithValue ("@categoria", categoria);
-            cmd.Parameters.AddWithValue ("@precio", precio);
-            try {
-                cn.Open ();
-                cmd.ExecuteNonQuery ();
-                MessageDialog md = new MessageDialog (this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, "Los Datos se guardaron Correctamente");
-                md.Run ();
-                md.Destroy ();
-            } catch (Exception ex) {
-                throw new Exception (ex.Message);
-            } finally {
-                cn.Dispose ();
-                cmd.Dispose ();
-            }
-            txtNombre.Text = "";
-            txtCategoria.Text = "";
-            txtprecio.Text = "";
+			VentanaAñadir añadir = new VentanaAñadir();
+			añadir.Show();
 		};
 		
 		deleteAction.Activated += delegate {
@@ -146,15 +113,7 @@ using MySql.Data.MySqlClient;
 
 			dataReaderActualiza.Close();
 		};
-	}
-	
-	private ListStore createListStore(int fieldCount){
-			Type[] types = new Type[fieldCount];
-			for (int index = 0; index < fieldCount; index++)
-				types[index] = typeof(string);
-				return new ListStore(types);
-		}		
-	
+	}	
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a){
 			Application.Quit ();
 			a.RetVal = true;
